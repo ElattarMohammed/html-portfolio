@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El-Kazaz Jewelry | مجوهرات القزاز</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #996515;
+            --black: #0f0f0f;
+            --soft-black: #1a1a1a;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .gold-price-bar {
+            background: var(--gold);
+            color: var(--black);
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-size: 0.9rem;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1515562141207-7a18b5ce7142?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid var(--gold);
+            text-align: center;
+        }
+
+        .logo-text {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--gold);
+            margin: 0;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .calculator-section {
+            background: var(--soft-black);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--dark-gold);
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .calculator-section h3 {
+            color: var(--gold);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            align-items: end;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            padding: 12px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.1);
+        }
+
+        button {
+            background: var(--gold);
+            color: var(--black);
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--dark-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 40px;
+            color: var(--gold);
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 10px auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background: var(--soft-black);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s;
+            border: 1px solid #222;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .card-img-container {
+            height: 350px; /* زيادة الطول ليناسب المجوهرات بشكل أفضل */
+            overflow: hidden;
+            background: #111;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* تغيير من cover لـ contain للحفاظ على تفاصيل القطع كاملة */
+            transition: 0.6s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: #888;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #050505;
+            color: #555;
+            border-top: 1px solid #222;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .calculator-section { padding: 20px; }
+            header { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gold-price-bar">
+        أسعار السوق اليوم: عيار 21 = 5825 ج.م | عيار 18 = 5000 ج.م
+    </div>
+
+    <header>
+        <h1 class="logo-text">El-Kazaz</h1>
+        <p class="tagline">أناقة تتوارثها الأجيال منذ عام 1984</p>
+    </header>
+
+    <div class="container">
+        <section class="calculator-section">
+            <h3>حاسبة السعر الفورية</h3>
+            <div class="calc-grid">
+                <div class="input-group">
+                    <label>اختر العيار</label>
+                    <select id="karat">
+                        <option value="5825">عيار 21 (أساسي)</option>
+                        <option value="5000">عيار 18 (إيطالي)</option>
+                        <option value="6660">عيار 24 (سبائك)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>الوزن (جرام)</label>
+                    <input type="number" id="weight" placeholder="أدخل الوزن">
+                </div>
+                <div class="input-group" style="text-align: center;">
+                    <label>السعر التقريبي</label>
+                    <h2 id="total-display" style="color: var(--gold); margin: 0;">0.00</h2>
+                    <small style="color: #666; font-size: 0.7rem;">+ المصنعية والضريبة</small>
+                </div>
+            </div>
+            <button onclick="calculatePrice()">احسب السعر النهائي</button>
+        </section>
+
+        <h2 class="section-title">مجموعتنا المختارة</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp Image 2026-01-04 at 6.49.32 PM.jpeg" alt="طقم king gold">
+                </div>
+                <div class="card-info">
+                    <h3>طقم king gold</h3>
+                    <p>ذهب عيار 21 - وزن 96.06 جرام</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp Image 2026-01-03 at 10.34.17 PM.jpeg" alt="طقم اندريا">
+                </div>
+                <div class="card-info">
+                    <h3>طقم اندريا</h3>
+                    <p>ذهب عيار 18 - شغل إيطالي - 5.68 جرام</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="5.jpg" alt="سبيكه btc">
+                </div>
+                <div class="card-info">
+                    <h3>سبيكه btc</h3>
+                    <p>ذهب عيار 24 - 50 جرام</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Screenshot 2026-01-04 191828.png" alt="خاتم egypt gold">
+                </div>
+                <div class="card-info">
+                    <h3>خاتم egypt gold</h3>
+                    <p>ذهب عيار 18 - 14.5 جرام</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="Screenshot 2026-01-05 000047.png" alt="كوليه سليمه جولد">
+                </div>
+                <div class="card-info">
+                    <h3>كوليه سليمه جولد</h3>
+                    <p>ذهب عيار 21 - 45.21 جرام</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="WhatsApp Image 2026-01-05 at 12.14.03 AM.jpeg" alt="كوليه egypt gold">
+                </div>
+                <div class="card-info">
+                    <h3>كوليه egypt gold</h3>
+                    <p>ذهب عيار 21 - 80.31 جرام</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; مجوهرات القزاز. أبو حمص، البحيرة، مصر.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">نصمم الفخامة لتناسب ذوقكم الرفيع</p>
+    </footer>
+
+    <script>
+        function calculatePrice() {
+            const rate = document.getElementById('karat').value;
+            const weight = document.getElementById('weight').value;
+            const workmanship = 200; 
+            
+            if(weight > 0) {
+                const total = (parseFloat(rate) + workmanship) * parseFloat(weight);
+                const withVAT = total * 1.025; 
+                document.getElementById('total-display').innerText = Math.round(withVAT).toLocaleString() + " ج.م";
+                document.getElementById('total-display').style.textShadow = "0 0 15px #D4AF37";
+                setTimeout(() => {
+                    document.getElementById('total-display').style.textShadow = "none";
+                }, 500);
+            } else {
+                alert("يرجى إدخال الوزن بشكل صحيح");
+            }
+        }
+    </script>
+</body>
+</html>
